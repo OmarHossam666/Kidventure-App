@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:kidventure/screens/onboarding_screen.dart';
+import 'package:kidventure/features/onboarding/ui/onboarding_screen.dart';
 import 'package:kidventure/secrets.dart';
-import 'package:kidventure/services/service_locator.dart';
+import 'package:kidventure/core/apis/service_locator.dart';
 
 Future<void> main() async {
   // Ensure Flutter binding is initialized
