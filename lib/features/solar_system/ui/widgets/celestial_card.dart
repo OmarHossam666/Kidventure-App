@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kidventure/features/solar_system/ui/three_dimensional_view_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kidventure/core/routing/routes.dart';
 import '../../models/celestial_body.dart';
 
 class CelestialCard extends StatefulWidget {
@@ -111,15 +112,9 @@ class _CelestialCardState extends State<CelestialCard> {
   }
 
   void _navigateToModel(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:
-            (context) => ThreeDimensionalViewScreen(
-              modelPath: widget.body.modelPath,
-              celestialBody: widget.body,
-            ),
-      ),
+    context.push(
+      AppRoutes.threeDimensionalViewScreen,
+      extra: {'modelPath': widget.body.modelPath, 'celestialBody': widget.body},
     );
   }
 }

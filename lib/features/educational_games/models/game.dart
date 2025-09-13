@@ -5,7 +5,7 @@ class Game {
   final String title;
   final String description;
   final String category;
-  final String difficulty;
+  final List<String> difficulty;
   final String duration;
   final IconData icon;
   final Function(BuildContext) onButtonPressed;

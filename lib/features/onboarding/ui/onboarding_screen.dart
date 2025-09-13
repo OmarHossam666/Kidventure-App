@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kidventure/core/constants/app_colors.dart';
+import 'package:kidventure/core/routing/routes.dart';
 import 'package:kidventure/features/onboarding/data/onboarding_screen_contents.dart';
-import 'package:kidventure/features/home/ui/home_screen.dart';
 import 'package:kidventure/features/onboarding/ui/widgets/indicator_dots.dart';
 import 'package:kidventure/features/onboarding/ui/widgets/onboarding_slide.dart';
 
@@ -18,10 +19,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   void goToNextPage() {
     if (currentPage == onBoardingScreenContents.length - 1) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+      context.go(AppRoutes.homeScreen);
     } else {
       pageController.nextPage(
         duration: const Duration(milliseconds: 500),
