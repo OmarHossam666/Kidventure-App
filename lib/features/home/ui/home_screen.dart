@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 children: [
                   const PerformanceAnalysisScreen(),
-                  const PathHomePage(),
+                   PathHomePage(),
                   _buildHomeContent(),
                   const ChatScreen(),
                   const SettingsScreen(),

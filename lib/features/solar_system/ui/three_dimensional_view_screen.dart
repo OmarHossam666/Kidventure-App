@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import '../models/camera_position.dart';
 import '../models/celestial_body.dart';
@@ -108,7 +109,7 @@ class _ThreeDimensionalViewScreenState extends State<ThreeDimensionalViewScreen>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         title: const Text("3D View", style: TextStyle(color: Colors.white)),
       ),
@@ -196,7 +197,7 @@ class _ThreeDimensionalViewScreenState extends State<ThreeDimensionalViewScreen>
             ),
             const SizedBox(height: 12),
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => context.pop(),
               child: const Text(
                 'Go Back',
                 style: TextStyle(color: Colors.white70),

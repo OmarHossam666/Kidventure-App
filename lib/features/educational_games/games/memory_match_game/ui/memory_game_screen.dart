@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:async';
 
 import '../data/card_repository.dart';
@@ -124,7 +125,7 @@ class MemoryGameScreenState extends State<MemoryGameScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                context.pop();
                 _resetGame();
               },
               child: Text('Return to Home',

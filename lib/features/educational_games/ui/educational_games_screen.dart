@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kidventure/core/constants/app_colors.dart';
 import 'package:kidventure/core/constants/app_text_styles.dart';
 import 'package:kidventure/features/educational_games/data/categories.dart';
@@ -41,7 +42,7 @@ class _EducationalGamesScreenState extends State<EducationalGamesScreen> {
           SliverAppBar(
             elevation: 0,
             leading: IconButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => context.pop(),
               icon: Icon(Icons.arrow_back, color: AppColors.primary),
             ),
             backgroundColor: AppColors.background,

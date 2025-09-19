@@ -17,7 +17,7 @@ class IndicatorDots extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(count, (index) {
-        return GestureDetector(
+        return InkWell(
           onTap: () => onDotPressed(index),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),

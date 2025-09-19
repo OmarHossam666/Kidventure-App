@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kidventure/core/routing/routes.dart';
 import 'package:kidventure/features/home/models/feature_card_content.dart';
-import 'package:kidventure/features/educational_games/ui/educational_games_screen.dart';
-import 'package:kidventure/features/flash_cards/ui/flashcards_screen.dart';
-import 'package:kidventure/features/interactive_stories/ui/interactive_stories_screen.dart';
-import 'package:kidventure/features/solar_system/ui/solar_system_screen.dart';
 
 final List<FeatureCardContent> featureCardContents = [
   FeatureCardContent(
@@ -13,10 +11,7 @@ final List<FeatureCardContent> featureCardContents = [
     lottiePath: "assets/lotties/daily_space_card_lottie.json",
     buttonText: "Start Your Exploration",
     onButtonPressed: (context) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => SolarSystemScreen()),
-      );
+      context.push(AppRoutes.solarSystemScreen);
     },
     gradientColors: [const Color(0xFFFF6B6B), const Color(0xFFFFB347)],
   ),
@@ -27,10 +22,7 @@ final List<FeatureCardContent> featureCardContents = [
     lottiePath: "assets/lotties/flashcards_card_lottie.json",
     buttonText: "Boost Your Brain Power",
     onButtonPressed: (context) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => FlashcardsScreen()),
-      );
+      context.push(AppRoutes.flashcardsScreen);
     },
     gradientColors: [const Color(0XFF6366F1), const Color(0XFF8B5CF6)],
   ),
@@ -41,10 +33,7 @@ final List<FeatureCardContent> featureCardContents = [
     lottiePath: "assets/lotties/educational_games_card_lottie.json",
     buttonText: "Start Your Adventure",
     onButtonPressed: (context) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => EducationalGamesScreen()),
-      );
+      context.push(AppRoutes.educationalGamesScreen);
     },
     gradientColors: [const Color(0XFF10B981), const Color(0XFF3B82F6)],
   ),
@@ -55,12 +44,7 @@ final List<FeatureCardContent> featureCardContents = [
     lottiePath: "assets/lotties/library_card_lottie.json",
     buttonText: "Begin Your Story Journey",
     onButtonPressed: (context) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const InteractiveStoriesScreen(),
-        ),
-      );
+     context.push(AppRoutes.interactiveStoriesScreen);
     },
     gradientColors: [const Color(0XFF8B5CF6), const Color(0XFFEC4899)],
   ),

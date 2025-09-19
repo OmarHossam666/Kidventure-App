@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kidventure/core/routing/routes.dart';
 import 'package:kidventure/core/widgets/staggered_animation.dart';
 import 'package:lottie/lottie.dart';
 import '../../../core/constants/app_colors.dart';
 import '../data/interactive_stories.dart';
 import '../models/interactive_story.dart';
-import 'interactive_story_screen.dart';
 
 class InteractiveStoriesScreen extends StatelessWidget {
   const InteractiveStoriesScreen({super.key});
@@ -25,7 +26,7 @@ class InteractiveStoriesScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.primary),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         centerTitle: true,
       ),
@@ -82,12 +83,7 @@ class InteractiveStoriesScreen extends StatelessWidget {
         color: Colors.white,
         child: InkWell(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => InteractiveStoryScreen(story: story),
-              ),
-            );
+            context.push(AppRoutes.interactiveStoryScreen, extra: story);
           },
           borderRadius: BorderRadius.circular(16),
           child: Padding(

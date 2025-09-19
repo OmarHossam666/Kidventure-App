@@ -9,10 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  go_router: ^16.2.1
+  flutter_screenutil: ^5.9.3
   flutter_3d_controller: ^2.1.0
   youtube_player_flutter: ^9.1.1
   flutter_flip_card: ^0.0.6
-  google_fonts: ^6.2.1
+  google_fonts: ^6.3.0
   http: ^1.1.0
   flutter_native_splash: ^2.4.5
   flutter_launcher_icons: ^0.14.3
@@ -44,6 +46,14 @@ flutter:
         - asset: assets/fonts/CrimsonText-Regular.ttf
         - asset: assets/fonts/CrimsonText-SemiBold.ttf
         - asset: assets/fonts/CrimsonText-SemiBoldItalic.ttf
+  
+    - family: ComicSansMS
+      fonts:
+        - asset: assets/fonts/ComicSansMS.ttf
+    - family: Cuprum
+      fonts:
+        - asset: assets/fonts/Cuprum-Italic.ttf
+
 
 flutter_native_splash:
   background_image: assets/images/splash_screen_image.png

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../core/constants/app_colors.dart';
@@ -111,7 +112,7 @@ class _InteractiveStoryScreenState extends State<InteractiveStoryScreen> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.primary),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
       ),
       body: _showEnding ? _buildEndingScreen() : _buildStoryContent(),
@@ -350,7 +351,7 @@ class _InteractiveStoryScreenState extends State<InteractiveStoryScreen> {
                                   vertical: 12,
                                 ),
                               ),
-                              onPressed: () => Navigator.pop(context),
+                              onPressed: () => context.pop(),
                               child: const Text(
                                 "OK",
                                 style: TextStyle(
@@ -513,7 +514,7 @@ class _InteractiveStoryScreenState extends State<InteractiveStoryScreen> {
                 Expanded(
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      Navigator.pop(context);
+                      context.pop();
                     },
                     icon: const Icon(
                       Icons.home,
