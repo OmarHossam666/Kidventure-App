@@ -1,8 +1,12 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kidventure/core/constants/app_colors.dart';
 import 'package:kidventure/core/helpers/spacing.dart';
+import 'package:kidventure/core/routing/routes.dart';
+import 'package:kidventure/features/educational_games/games/math_game/data/equations_content.dart';
+import 'package:kidventure/features/educational_games/games/math_game/models/difficulty_enum.dart';
 import 'package:kidventure/features/educational_games/games/math_game/ui/widgets/background_widget.dart';
 import 'package:kidventure/features/educational_games/games/math_game/ui/widgets/play_button.dart';
 import 'package:kidventure/features/educational_games/games/math_game/ui/widgets/stroked_text.dart';
@@ -23,11 +27,7 @@ class _MathGameScreenState extends State<MathGameScreen> {
     "4 x ? = 24",
     "11 ÷ ? = 4",
   ];
-  final List<Map<String, dynamic>> difficulties = [
-    {"level": " Easy ", "color": Color(0xFF14E40D)},
-    {"level": "Medium", "color": Color(0xFFFFC107)},
-    {"level": " Hard ", "color": Color.fromARGB(255, 237, 40, 26)},
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,7 +113,22 @@ class _MathGameScreenState extends State<MathGameScreen> {
                   verticalSpace(50.h),
                   PlayButton(
                     onPressed: () {
-                      // Handle play button press
+                      context.push(
+                        AppRoutes.mathGamePlayScreen,
+                        extra: {
+                          "difficulty":
+                              Difficulty.values[_currentDifficultyIndex],
+                          "equations":
+                              EquationsContent.equations
+                                  .where(
+                                    (eq) =>
+                                        eq.difficulty ==
+                                        Difficulty
+                                            .values[_currentDifficultyIndex],
+                                  )
+                                  .toList(),
+                        },
+                      );
                     },
                   ),
                 ],
@@ -132,7 +147,7 @@ class _MathGameScreenState extends State<MathGameScreen> {
                   dotHeight: 12.w,
                   dotWidth: 12.w,
                   activeDotColor:
-                      difficulties[_currentDifficultyIndex]["color"],
+                      Difficulty.values[_currentDifficultyIndex].value["color"],
                   dotColor: Colors.white,
                   spacing: 8.w,
                 ),
@@ -145,12 +160,16 @@ class _MathGameScreenState extends State<MathGameScreen> {
             child: Transform.rotate(
               angle: -20 * math.pi / 180, // 20 degrees
               child: StrokedText(
-                text: difficulties[_currentDifficultyIndex]["level"],
+                text:
+                    Difficulty
+                        .values[_currentDifficultyIndex]
+                        .value["difficulty"],
                 fontSize: 48.sp,
                 fontWeight: FontWeight.bold,
                 strokeWidth: 3.w,
                 strokeColor: Colors.black,
-                textColor: difficulties[_currentDifficultyIndex]["color"],
+                textColor:
+                    Difficulty.values[_currentDifficultyIndex].value["color"],
                 fontFamily: 'Cuprum',
               ),
             ),
