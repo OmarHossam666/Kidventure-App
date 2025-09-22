@@ -55,21 +55,26 @@ class GameCard extends StatelessWidget {
                         Text(game.duration, style: AppTextStyles.bodySmall),
                       ],
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: _getDifficultyColor(game.difficulty),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        game.difficulty,
-                        style: AppTextStyles.bodySmall.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
+                    Row(
+                      children: List.generate(game.difficulty.length, (index) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          margin: EdgeInsets.only(left: index == 0 ? 0 : 4),
+                          decoration: BoxDecoration(
+                            color: _getDifficultyColor(game.difficulty[index]),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            game.difficulty[index],
+                            style: AppTextStyles.bodySmall.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      }),
                     ),
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MorningDialog extends StatelessWidget {
   const MorningDialog({super.key});
@@ -40,7 +41,7 @@ class MorningDialog extends StatelessWidget {
                     TextStyle(fontSize: w * 0.05, color: Colors.red.shade700)),
             SizedBox(height: w * 0.05),
             ElevatedButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => context.pop(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
                 shape: RoundedRectangleBorder(

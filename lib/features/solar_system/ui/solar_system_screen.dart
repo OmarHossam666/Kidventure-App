@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kidventure/core/constants/app_colors.dart';
 import 'package:kidventure/features/solar_system/data/celestial_bodies.dart';
 import 'package:kidventure/features/solar_system/ui/widgets/celestial_card.dart';
@@ -19,7 +20,7 @@ class SolarSystemScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, size: 28),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
       ),

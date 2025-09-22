@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kidventure/core/constants/app_colors.dart';
 import 'package:kidventure/features/flash_cards/data/topics.dart';
@@ -36,7 +37,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: AppColors.primary),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop(context);
           },
         ),
       ),

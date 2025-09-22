@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 void showSuccessDialog(BuildContext context, VoidCallback onNext) {
   final screenWidth = MediaQuery.of(context).size.width;
@@ -66,7 +67,7 @@ void showSuccessDialog(BuildContext context, VoidCallback onNext) {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  context.pop();
                   onNext();
                 },
                 child: Text(
@@ -149,7 +150,7 @@ void showMorningDialog(BuildContext context) {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  context.pop();
                 },
                 child: Text(
                   'Home',

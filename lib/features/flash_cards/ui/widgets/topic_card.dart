@@ -1,16 +1,20 @@
 // lib/widgets/topic_card.dart
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kidventure/core/routing/routes.dart';
 import '../../models/topic.dart';
 import '../../data/sections_data.dart';
-import '../section_detail_screen.dart';
 
 class TopicCard extends StatefulWidget {
   final Topic topic;
   final Duration animationDelay;
 
-  const TopicCard(
-      {super.key, required this.topic, required this.animationDelay});
+  const TopicCard({
+    super.key,
+    required this.topic,
+    required this.animationDelay,
+  });
 
   @override
   State<TopicCard> createState() => _TopicCardState();
@@ -29,12 +33,14 @@ class _TopicCardState extends State<TopicCard>
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    _scaleAnimation = Tween<double>(begin: 0.95, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
-    _translateAnimation = Tween<double>(begin: 20.0, end: 0.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.95,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    _translateAnimation = Tween<double>(
+      begin: 20.0,
+      end: 0.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     Future.delayed(widget.animationDelay, () {
       if (mounted) {
         _controller.forward();
@@ -54,17 +60,11 @@ class _TopicCardState extends State<TopicCard>
       (s) => s.id == widget.topic.id,
       orElse: () => sections.first, // Provide a fallback section
     );
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => SectionDetailScreen(
-          section: section,
-          topicColor: widget.topic.color,
-        ),
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
-      ),
+    context.push(
+      AppRoutes.sectionDetailScreen,
+      extra: {'section': section, 'topicColor': widget.topic.color},
     );
+
   }
 
   @override
@@ -83,10 +83,7 @@ class _TopicCardState extends State<TopicCard>
       builder: (context, child) {
         return Transform.translate(
           offset: Offset(0, _translateAnimation.value),
-          child: Transform.scale(
-            scale: _scaleAnimation.value,
-            child: child,
-          ),
+          child: Transform.scale(scale: _scaleAnimation.value, child: child),
         );
       },
       child: GestureDetector(
@@ -153,13 +150,18 @@ class _TopicCardState extends State<TopicCard>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Start Learning',
-                        style: TextStyle(fontSize: buttonFont)),
+                    Text(
+                      'Start Learning',
+                      style: TextStyle(fontSize: buttonFont),
+                    ),
                     SizedBox(width: buttonPaddingH * 0.1),
                     Transform.translate(
                       offset: const Offset(0, 1),
-                      child: Icon(Icons.arrow_forward,
-                          size: buttonFont * 1.2, color: Colors.white),
+                      child: Icon(
+                        Icons.arrow_forward,
+                        size: buttonFont * 1.2,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),

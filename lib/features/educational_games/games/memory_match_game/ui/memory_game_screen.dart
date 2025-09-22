@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:async';
 
 import '../data/card_repository.dart';
@@ -36,9 +37,11 @@ class MemoryGameScreenState extends State<MemoryGameScreen> {
   void _startTimer() {
     _timer?.cancel();
     _secondsElapsed = 0;
-    _timer = Timer.periodic(Duration(seconds: 1), (_) {
-      setState(() => _secondsElapsed++);
-    });
+    if (mounted) {
+      _timer = Timer.periodic(Duration(seconds: 1), (_) {
+        setState(() => _secondsElapsed++);
+      });
+    }
   }
 
   void _maybeShowMorningDialog() {
@@ -46,11 +49,11 @@ class MemoryGameScreenState extends State<MemoryGameScreen> {
     if (hour >= 6 && hour < 18) {
       Future.delayed(Duration(milliseconds: 500), () {
         if (mounted) {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) => MorningDialog(),
-        );
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => MorningDialog(),
+          );
         }
       });
     }
@@ -60,11 +63,12 @@ class MemoryGameScreenState extends State<MemoryGameScreen> {
     if (isMemorizationPhase) return;
     final card = cards[index];
     if (isProcessing || card.isFlipped || card.isMatched) return;
-
-    setState(() {
-      card.isFlipped = true;
-      moves++;
-    });
+    if (mounted) {
+      setState(() {
+        card.isFlipped = true;
+        moves++;
+      });
+    }
 
     if (previousIndex == -1) {
       previousIndex = index;
@@ -72,10 +76,12 @@ class MemoryGameScreenState extends State<MemoryGameScreen> {
       isProcessing = true;
       final prev = cards[previousIndex];
       if (prev.flag == card.flag) {
-        setState(() {
-          prev.isMatched = true;
-          card.isMatched = true;
-        });
+        if (mounted) {
+          setState(() {
+            prev.isMatched = true;
+            card.isMatched = true;
+          });
+        }
         _endPairCheck();
       } else {
         Future.delayed(Duration(seconds: 1), () {
@@ -101,58 +107,73 @@ class MemoryGameScreenState extends State<MemoryGameScreen> {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (_) => AlertDialog(
-          backgroundColor: Colors.red.shade50,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          title: Center(
-              child: Text('Congratulations!',
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: Colors.red.shade50,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: Center(
+                child: Text(
+                  'Congratulations!',
                   style: TextStyle(
-                      color: Colors.red.shade700,
-                      fontWeight: FontWeight.bold))),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('You completed the game in $moves moves.',
-                  textAlign: TextAlign.center),
-              SizedBox(height: 8),
-              Text('Time elapsed: $_secondsElapsed seconds',
-                  textAlign: TextAlign.center),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                _resetGame();
-              },
-              child: Text('Return to Home',
-                  style: TextStyle(color: Colors.red.shade700)),
+                    color: Colors.red.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'You completed the game in $moves moves.',
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Time elapsed: $_secondsElapsed seconds',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    context.pop();
+                    _resetGame();
+                  },
+                  child: Text(
+                    'Return to Home',
+                    style: TextStyle(color: Colors.red.shade700),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
       );
     }
   }
 
   void _resetGame() {
-    setState(() {
-      cards = CardRepository.initializeCards();
-      moves = 0;
-      previousIndex = -1;
-      isProcessing = false;
-      isMemorizationPhase = true;
-    });
+    if (mounted) {
+      setState(() {
+        cards = CardRepository.initializeCards();
+        moves = 0;
+        previousIndex = -1;
+        isProcessing = false;
+        isMemorizationPhase = true;
+      });
+    }
     _startTimer();
     // بعد 3 ثوانٍ إخفاء البطاقات
     Timer(Duration(seconds: 3), () {
-      setState(() {
-        for (var c in cards) {
-          c.isFlipped = false;
-        }
-        isMemorizationPhase = false;
-      });
+      if (mounted) {
+        setState(() {
+          for (var c in cards) {
+            c.isFlipped = false;
+          }
+          isMemorizationPhase = false;
+        });
+      }
     });
   }
 
@@ -183,12 +204,12 @@ class MemoryGameScreenState extends State<MemoryGameScreen> {
               child: GridView.builder(
                 padding: EdgeInsets.all(8),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
-                itemCount: cards.length,
-                itemBuilder: (_, i) => MemoryCard(
-                  model: cards[i],
-                  onTap: () => _onCardTap(i),
+                  crossAxisCount: 3,
                 ),
+                itemCount: cards.length,
+                itemBuilder:
+                    (_, i) =>
+                        MemoryCard(model: cards[i], onTap: () => _onCardTap(i)),
               ),
             ),
             ResetButton(onPressed: _resetGame),

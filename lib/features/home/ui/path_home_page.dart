@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kidventure/core/constants/app_colors.dart';
+import 'package:kidventure/core/routing/routes.dart';
 import 'path_home_page_widgets/dashed_path_painter.dart';
 import 'path_home_page_widgets/path_card.dart';
-import '../../mind_maps/ui/mind_map_screen.dart';
 
 class PathHomePage extends StatelessWidget {
-  const PathHomePage({super.key});
+  PathHomePage({super.key});
 
   // Define learning paths data
-  final List<Map<String, dynamic>> _learningPaths = const [
-    {'title': 'Human Body', 'locked': false, 'route': MindMapScreen()},
+  final List<Map<String, dynamic>> _learningPaths = [
+    {'title': 'Human Body', 'locked': false, 'route': AppRoutes.mindMapScreen},
     {'title': 'Digestive System', 'locked': true, 'route': null},
     {'title': 'Respiratory System', 'locked': true, 'route': null},
     {'title': 'Cells', 'locked': true, 'route': null},
@@ -67,17 +68,11 @@ class PathHomePage extends StatelessWidget {
                       top: positions[index].dy,
                       width: cardW,
                       height: cardH,
-                      child: GestureDetector(
+                      child: InkWell(
                         onTap: () {
                           if (!pathData['locked'] &&
                               pathData['route'] != null) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => pathData['route'] as Widget,
-                              ),
-                            );
+                            context.push(pathData['route'] as String);
                           }
                         },
                         child: PathCard(
