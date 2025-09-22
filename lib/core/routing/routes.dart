@@ -1,6 +1,7 @@
 class AppRoutes {
   static final String onboardingScreen = '/onboardingScreen';
   static final String mathGameScreen = '/mathGameScreen';
+  static final String mathGamePlayScreen = '/mathGamePlayScreen';
   static final String memoryGameScreen = '/memoryGameScreen';
   static final String puzzleGameScreen = '/puzzleGameScreen';
   static final String volcanoGamePage = '/volcanoGamePage';

@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:kidventure/core/routing/routes.dart';
+import 'package:kidventure/features/educational_games/games/math_game/ui/math_game_play_screen.dart';
 import 'package:kidventure/features/educational_games/games/math_game/ui/math_game_screen.dart';
 import 'package:kidventure/features/educational_games/games/memory_match_game/ui/memory_game_screen.dart';
 import 'package:kidventure/features/educational_games/games/puzzle/ui/puzzle_screen.dart';
@@ -97,6 +98,17 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.mindMapScreen,
         builder: (context, state) => const MindMapScreen(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.mathGamePlayScreen,
+        builder: (context, state) {
+          final details = state.extra as Map<String, dynamic>;
+          return MathGamePlayScreen(
+            difficulty: details['difficulty'],
+            equations: details['equations'],
+          );
+        },
       ),
 
       GoRoute(
