@@ -77,7 +77,7 @@ class _CelestialCardState extends State<CelestialCard> {
   Widget _buildDescription() {
     return Text(
       widget.body.description,
-      style: const TextStyle(fontSize: 14, color: Colors.grey),
+      style: const TextStyle(fontSize: 14, color: Colors.white),
       textAlign: TextAlign.center,
     );
   }

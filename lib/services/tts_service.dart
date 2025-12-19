@@ -72,7 +72,7 @@ class TtsService {
     // Configure TTS settings for child-friendly voice
     await _flutterTts!.setLanguage("en-US");
     await _flutterTts!.setPitch(
-      1.1,
+      1.0,
     ); // Slightly higher pitch for a child-friendly female voice
     await _flutterTts!.setSpeechRate(0.5); // Slower speech rate for children
     await _flutterTts!.setVolume(1.0);
